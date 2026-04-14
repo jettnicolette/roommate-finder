@@ -11,3 +11,12 @@ CREATE TABLE IF NOT EXISTS users (
     major VARCHAR(100),
     home_state VARCHAR(50)
 );
+
+CREATE TABLE IF NOT EXISTS habits (
+    habit_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    wake_time TIME,
+    sleep_time TIME,
+    study_hours INT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
