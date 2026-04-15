@@ -4,6 +4,12 @@ VALUES
 ('asmith', 'hashedpw2', 'asmith@example.com', '555-333-4444', 'Alice Smith', 2026, false, 'Female', 'Biology', 'WV'),
 ('mlee', 'hashedpw3', 'mlee@example.com', '555-555-6666', 'Marcus Lee', 2028, true, 'Male', 'Business', 'OH');
 
+INSERT INTO habits (user_id, wake_time, sleep_time, study_hours)
+VALUES
+(1, '08:00:00', '22:00:00', 5),
+(2, '07:30:00', '23:00:00', 4),
+(3, '09:00:00', '21:00:00', 6);
+
 INSERT INTO location (address, unit_number, city, state, zip_code, is_onCampus, allows_pets)
 VALUES
 ('123 Main St', 'Apt 1', 'Pittsburgh', 'PA', '15213', true, false),
