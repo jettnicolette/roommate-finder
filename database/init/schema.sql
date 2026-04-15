@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS habits (
     sleep_time TIME,
     study_hours INT,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS location (
     location_id SERIAL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
@@ -29,3 +31,4 @@ CREATE TABLE IF NOT EXISTS location (
     is_onCampus BOOLEAN NOT NULL,
     allows_pets BOOLEAN NOT NULL
 );
+
