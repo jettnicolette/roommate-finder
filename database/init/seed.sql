@@ -10,3 +10,8 @@ VALUES
 (2, '07:30:00', '23:00:00', 4),
 (3, '09:00:00', '21:00:00', 6);
 
+INSERT INTO location (address, unit_number, city, state, zip_code, is_onCampus, allows_pets)
+VALUES
+('123 Main St', 'Apt 1', 'Pittsburgh', 'PA', '15213', true, false),
+('456 Oak Ave', NULL, 'Columbus', 'OH', '43210', false, true),
+('789 Pine Rd', 'Unit B', 'Charleston', 'WV', '25301', true, true);

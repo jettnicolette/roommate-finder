@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import { pool } from "./db";
 import usersRouter from "./routes/users";
 import habitsRouter from "./routes/habits";
+import locationsRouter from "./routes/location";
+
+
 
 dotenv.config();
 
@@ -27,6 +30,7 @@ app.get("/", async (_req, res) => {
 
 app.use("/users", usersRouter);
 app.use("/habits", habitsRouter);
+app.use("/locations", locationsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
