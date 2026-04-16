@@ -15,3 +15,9 @@ VALUES
 ('123 Main St', 'Apt 1', 'Pittsburgh', 'PA', '15213', true, false),
 ('456 Oak Ave', NULL, 'Columbus', 'OH', '43210', false, true),
 ('789 Pine Rd', 'Unit B', 'Charleston', 'WV', '25301', true, true);
+
+INSERT INTO match (user1_id, user2_id, location_id, status)
+VALUES
+(1, 2, 1, 'pending'),
+(1, 3, 2, 'accepted'),
+(2, 3, 3, 'rejected');

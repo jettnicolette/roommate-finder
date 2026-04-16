@@ -5,6 +5,7 @@ import { pool } from "./db";
 import usersRouter from "./routes/users";
 import habitsRouter from "./routes/habits";
 import locationsRouter from "./routes/location";
+import matchRouter from "./routes/match";
 
 
 
@@ -31,6 +32,7 @@ app.get("/", async (_req, res) => {
 app.use("/users", usersRouter);
 app.use("/habits", habitsRouter);
 app.use("/locations", locationsRouter);
+app.use("/matches", matchRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

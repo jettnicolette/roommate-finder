@@ -32,3 +32,13 @@ CREATE TABLE IF NOT EXISTS location (
     allows_pets BOOLEAN NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTES match (
+    match_id SERIAL PRIMARY KEY,
+    user1_id INT NOT NULL,
+    user2_id INT NOT NULL,
+    location_id INT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (location_id) REFERENCES location(location_id) ON DELETE CASCADE
+);
