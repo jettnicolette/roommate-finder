@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS location (
     allows_pets BOOLEAN NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTES match (
+CREATE TABLE IF NOT EXISTS match (
     match_id SERIAL PRIMARY KEY,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL,

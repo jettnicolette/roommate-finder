@@ -7,15 +7,18 @@
     "doc": "docs"
   },
   "scripts": {
-  "client": "npm run dev --prefix client",
-  "server": "npm run dev --prefix server",
-  "dev": "concurrently \"npm run server\" \"npm run client\""
-},
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.14.1"
   }
 }

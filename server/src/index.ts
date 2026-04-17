@@ -7,8 +7,6 @@ import habitsRouter from "./routes/habits";
 import locationsRouter from "./routes/location";
 import matchRouter from "./routes/match";
 
-
-
 dotenv.config();
 
 const app = express();
