@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// Create a new habit
+// POST a new habit
 router.post("/", async (req, res) => {
   const { user_id, wake_time, sleep_time, study_hours } = req.body;
     if (!user_id || !wake_time || !sleep_time || !study_hours) {

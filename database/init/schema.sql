@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS location (
     city VARCHAR(100) NOT NULL,
     state VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
-    is_onCampus BOOLEAN NOT NULL,
+    is_oncampus BOOLEAN NOT NULL,
     allows_pets BOOLEAN NOT NULL
 );
 
