@@ -1,6 +1,7 @@
 import './Home.css'
 import Match from './Match.tsx'
 import Profile from './Profile.tsx'
+import UsersPage from './UsersPage.tsx'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 
@@ -17,7 +18,7 @@ function Home() {
         </nav>
         
         <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<UsersPage />} />
         <Route path="/match" element={<Match />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
