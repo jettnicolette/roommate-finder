@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
+  --text: #c9c6cc;
+  --text-h: #b9b9b9;
   --bg: #fff;
   --border: #e5e4e7;
   --accent: #aa3bff;
@@ -24,10 +24,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
+    --text: #d2d4d8;
     --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
+    --bg: #26293b;
+    --border: #393a2e;
     --accent: #c084fc;
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
