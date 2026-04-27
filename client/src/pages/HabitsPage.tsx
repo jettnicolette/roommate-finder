@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { AuthUser } from "../api/auth";
-import { getHabits, saveHabits, type Habit } from "../api/habits";
+import { getHabits, saveHabits, deleteHabits, type Habit } from "../api/habits";
 
 type HabitsPageProps = {
   currentUser: AuthUser;
@@ -11,6 +11,7 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
   const [habits, setHabits] = useState<Habit | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -68,6 +69,35 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
     }
   }
 
+  async function handleDelete() {
+    if (!window.confirm("Are you sure you want to delete all your habits? This cannot be undone.")) {
+      return;
+    }
+
+    setDeleting(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      await deleteHabits(currentUser.user_id);
+      setSuccess("Habits deleted successfully!");
+      // Reset form to empty state
+      setHabits({
+        user_id: currentUser.user_id,
+        wake_time: null,
+        sleep_time: null,
+        study_hours: null,
+      });
+      setTimeout(() => {
+        onBack();
+      }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete habits");
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-zinc-800 px-4 py-10">
@@ -110,6 +140,30 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
         {success && (
           <div className="mb-4 rounded-lg border border-green-400 bg-green-50 px-4 py-3">
             <p className="text-sm text-green-700">{success}</p>
+          </div>
+        )}
+
+        {/* Current Habits View */}
+        {(habits.wake_time || habits.sleep_time || habits.study_hours) && (
+          <div className="mb-6 rounded-2xl border border-green-300 bg-zinc-600 p-6">
+            <h2 className="text-green-300 mb-4 text-lg font-semibold">Current Habits</h2>
+            <div className="grid gap-3 text-sm md:grid-cols-3">
+              {habits.wake_time && (
+                <p className="text-blue-300">
+                  <span className="font-medium">Wake Up:</span> {habits.wake_time}
+                </p>
+              )}
+              {habits.sleep_time && (
+                <p className="text-blue-300">
+                  <span className="font-medium">Sleep Time:</span> {habits.sleep_time}
+                </p>
+              )}
+              {habits.study_hours && (
+                <p className="text-blue-300">
+                  <span className="font-medium">Study Hours:</span> {habits.study_hours} hrs/day
+                </p>
+              )}
+            </div>
           </div>
         )}
 
@@ -185,6 +239,14 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
               className="flex-1 rounded-md border border-blue-300 bg-zinc-700 px-4 py-2 font-medium text-blue-300 hover:bg-zinc-600"
             >
               Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={deleting}
+              className="flex-1 rounded-md border border-red-400 bg-red-600 px-4 py-2 font-medium text-white hover:bg-red-700 disabled:opacity-50"
+            >
+              {deleting ? "Deleting..." : "Delete All"}
             </button>
           </div>
         </form>
