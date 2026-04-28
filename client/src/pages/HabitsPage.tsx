@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { AuthUser } from "../api/auth";
 import { getHabits, saveHabits, deleteHabits, type Habit } from "../api/habits";
+import "./pages.css";
 
 type HabitsPageProps = {
   currentUser: AuthUser;
@@ -100,165 +101,108 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-zinc-800 px-4 py-10">
-        <div className="mx-auto max-w-2xl">
-          <p className="text-center text-blue-300">Loading habits...</p>
-        </div>
+      <div className="page-container">
+        <p className="text-center">Loading habits...</p>
       </div>
     );
   }
 
   if (!habits) {
     return (
-      <div className="min-h-screen bg-zinc-800 px-4 py-10">
-        <div className="mx-auto max-w-2xl">
-          <p className="text-center text-red-300">Failed to load habits</p>
-        </div>
+      <div className="page-container">
+        <p className="text-center text-error">Failed to load habits</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-800 px-4 py-10">
-      <div className="mx-auto max-w-2xl">
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-blue-400 text-3xl font-bold">Your Habits</h1>
-          <p className="mt-2 text-sm text-blue-300">
-            Set your daily schedule and preferences
-          </p>
-        </header>
+    <div className="page-container">
+      <header className="page-header">
+        <h1>Your Habits</h1>
+        <p>Set your daily schedule and preferences</p>
+      </header>
 
-        {/* Error Banner */}
-        {error && (
-          <div className="mb-4 rounded-lg border border-red-400 bg-red-50 px-4 py-3">
-            <p className="text-sm text-red-700">{error}</p>
-          </div>
-        )}
+      {error && <div className="alert alert-error">{error}</div>}
+      {success && <div className="alert alert-success">{success}</div>}
 
-        {/* Success Banner */}
-        {success && (
-          <div className="mb-4 rounded-lg border border-green-400 bg-green-50 px-4 py-3">
-            <p className="text-sm text-green-700">{success}</p>
-          </div>
-        )}
-
-        {/* Current Habits View */}
-        {(habits.wake_time || habits.sleep_time || habits.study_hours) && (
-          <div className="mb-6 rounded-2xl border border-green-300 bg-zinc-600 p-6">
-            <h2 className="text-green-300 mb-4 text-lg font-semibold">Current Habits</h2>
-            <div className="grid gap-3 text-sm md:grid-cols-3">
-              {habits.wake_time && (
-                <p className="text-blue-300">
-                  <span className="font-medium">Wake Up:</span> {habits.wake_time}
-                </p>
-              )}
-              {habits.sleep_time && (
-                <p className="text-blue-300">
-                  <span className="font-medium">Sleep Time:</span> {habits.sleep_time}
-                </p>
-              )}
-              {habits.study_hours && (
-                <p className="text-blue-300">
-                  <span className="font-medium">Study Hours:</span> {habits.study_hours} hrs/day
-                </p>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Form */}
-        <form
-          onSubmit={handleSave}
-          className="rounded-2xl border border-blue-200 bg-zinc-600 p-6 shadow-sm"
-        >
-          <div className="space-y-6">
-            {/* Wake Time */}
-            <div>
-              <label className="block text-sm font-medium text-blue-300 mb-2">
-                Wake Up Time
-              </label>
-              <input
-                type="time"
-                value={habits.wake_time || ""}
-                onChange={(e) => handleChange("wake_time", e.target.value)}
-                className="w-full rounded-md border border-blue-300 bg-zinc-700 px-4 py-2 text-blue-100 focus:border-blue-400 focus:outline-none"
-              />
-              <p className="mt-1 text-xs text-blue-300">
-                When do you typically wake up?
+      {(habits.wake_time || habits.sleep_time || habits.study_hours) && (
+        <div className="card card-success">
+          <h2>Current Habits</h2>
+          <div className="habits-grid">
+            {habits.wake_time && (
+              <p>
+                <span className="label">Wake Up:</span> {habits.wake_time}
               </p>
-            </div>
-
-            {/* Sleep Time */}
-            <div>
-              <label className="block text-sm font-medium text-blue-300 mb-2">
-                Sleep Time
-              </label>
-              <input
-                type="time"
-                value={habits.sleep_time || ""}
-                onChange={(e) => handleChange("sleep_time", e.target.value)}
-                className="w-full rounded-md border border-blue-300 bg-zinc-700 px-4 py-2 text-blue-100 focus:border-blue-400 focus:outline-none"
-              />
-              <p className="mt-1 text-xs text-blue-300">
-                When do you typically go to sleep?
+            )}
+            {habits.sleep_time && (
+              <p>
+                <span className="label">Sleep Time:</span> {habits.sleep_time}
               </p>
-            </div>
-
-            {/* Study Hours */}
-            <div>
-              <label className="block text-sm font-medium text-blue-300 mb-2">
-                Study Hours Per Day
-              </label>
-              <input
-                type="number"
-                min="0"
-                max="24"
-                value={habits.study_hours ?? ""}
-                onChange={(e) => handleChange("study_hours", e.target.value ? parseInt(e.target.value, 10) : null)}
-                className="w-full rounded-md border border-blue-300 bg-zinc-700 px-4 py-2 text-blue-100 focus:border-blue-400 focus:outline-none"
-              />
-              <p className="mt-1 text-xs text-blue-300">
-                How many hours do you study per day?
+            )}
+            {habits.study_hours && (
+              <p>
+                <span className="label">Study Hours:</span> {habits.study_hours} hrs/day
               </p>
-            </div>
+            )}
           </div>
-
-          {/* Buttons */}
-          <div className="mt-8 flex gap-3">
-            <button
-              type="submit"
-              disabled={saving}
-              className="flex-1 rounded-md border border-blue-300 bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50"
-            >
-              {saving ? "Saving..." : "Save Habits"}
-            </button>
-            <button
-              type="button"
-              onClick={onBack}
-              className="flex-1 rounded-md border border-blue-300 bg-zinc-700 px-4 py-2 font-medium text-blue-300 hover:bg-zinc-600"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              onClick={handleDelete}
-              disabled={deleting}
-              className="flex-1 rounded-md border border-red-400 bg-red-600 px-4 py-2 font-medium text-white hover:bg-red-700 disabled:opacity-50"
-            >
-              {deleting ? "Deleting..." : "Delete All"}
-            </button>
-          </div>
-        </form>
-
-        {/* Info Box */}
-        <div className="mt-8 rounded-2xl border border-blue-200 bg-zinc-600 p-6">
-          <h3 className="text-blue-300 mb-2 font-semibold">About Your Habits</h3>
-          <p className="text-sm text-blue-300">
-            Your habits help us match you with compatible roommates. Be honest about your daily
-            routine so we can find someone with similar lifestyle preferences.
-          </p>
         </div>
+      )}
+
+      <form onSubmit={handleSave} className="form">
+        <div className="form-group">
+          <label htmlFor="wake-time">Wake Up Time</label>
+          <input
+            id="wake-time"
+            type="time"
+            value={habits.wake_time || ""}
+            onChange={(e) => handleChange("wake_time", e.target.value)}
+          />
+          <p className="form-hint">When do you typically wake up?</p>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="sleep-time">Sleep Time</label>
+          <input
+            id="sleep-time"
+            type="time"
+            value={habits.sleep_time || ""}
+            onChange={(e) => handleChange("sleep_time", e.target.value)}
+          />
+          <p className="form-hint">When do you typically go to sleep?</p>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="study-hours">Study Hours Per Day</label>
+          <input
+            id="study-hours"
+            type="number"
+            min="0"
+            max="24"
+            value={habits.study_hours ?? ""}
+            onChange={(e) => handleChange("study_hours", e.target.value ? parseInt(e.target.value, 10) : null)}
+          />
+          <p className="form-hint">How many hours do you study per day?</p>
+        </div>
+
+        <div className="button-group">
+          <button type="submit" disabled={saving} className="btn btn-primary">
+            {saving ? "Saving..." : "Save Habits"}
+          </button>
+          <button type="button" onClick={onBack} className="btn btn-secondary">
+            Cancel
+          </button>
+          <button type="button" onClick={handleDelete} disabled={deleting} className="btn btn-danger">
+            {deleting ? "Deleting..." : "Delete All"}
+          </button>
+        </div>
+      </form>
+
+      <div className="card">
+        <h3>About Your Habits</h3>
+        <p>
+          Your habits help us match you with compatible roommates. Be honest about your daily
+          routine so we can find someone with similar lifestyle preferences.
+        </p>
       </div>
     </div>
   );

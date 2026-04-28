@@ -1,0 +1,379 @@
+/* Shared styling for all pages */
+
+:root {
+  --color-bg: #27272a;
+  --color-bg-dark: #18181b;
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1e40af;
+  --color-primary-light: #60a5fa;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-error-light: #fca5a5;
+  --color-text-primary: #e0e7ff;
+  --color-text-secondary: #cbd5e1;
+  --color-border: #60a5fa;
+}
+
+/* Page Layout */
+.page-container {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding: 2.5rem 1rem;
+}
+
+.page-container > * + * {
+  margin-top: 1.5rem;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+/* Header */
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #60a5fa;
+  margin: 0;
+}
+
+.page-header p {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #60a5fa;
+}
+
+/* Alerts */
+.alert {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid;
+  font-size: 0.875rem;
+}
+
+.alert.alert-error {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #7f1d1d;
+}
+
+.alert.alert-success {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+/* Cards */
+.card {
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background-color: #3f3f46;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #60a5fa;
+}
+
+.card.card-success {
+  border-color: #10b981;
+}
+
+.card.card-success h2 {
+  color: #10b981;
+}
+
+.card.card-success p {
+  color: #60a5fa;
+}
+
+/* Habits Grid */
+.habits-grid {
+  display: grid;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .habits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.habits-grid p {
+  color: #60a5fa;
+  margin: 0;
+}
+
+.label {
+  font-weight: 500;
+  color: #93c5fd;
+}
+
+/* Forms */
+.form {
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background-color: #3f3f46;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #60a5fa;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-border);
+  background-color: #27272a;
+  color: #e0e7ff;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.form-hint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #60a5fa;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.btn.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn.btn-secondary {
+  background-color: #3f3f46;
+  border-color: var(--color-border);
+  color: #60a5fa;
+}
+
+.btn.btn-secondary:hover:not(:disabled) {
+  background-color: #52525b;
+  border-color: var(--color-border);
+}
+
+.btn.btn-danger {
+  background-color: var(--color-error);
+  border-color: var(--color-error);
+  color: white;
+}
+
+.btn.btn-danger:hover:not(:disabled) {
+  background-color: #dc2626;
+  border-color: #dc2626;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-error {
+  color: var(--color-error-light);
+}
+
+/* Search Container */
+.search-container {
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background-color: #3f3f46;
+  color: #e0e7ff;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: #a1a1aa;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+/* Roommates Grid */
+.roommates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.roommate-card {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background-color: #3f3f46;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.2s;
+}
+
+.roommate-card:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+}
+
+.roommate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.roommate-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.roommate-header .username {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.match-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background-color: #10b981;
+  border-radius: 0.375rem;
+  min-width: 50px;
+}
+
+.match-score {
+  font-weight: bold;
+  color: white;
+  font-size: 1rem;
+}
+
+.match-label {
+  font-size: 0.625rem;
+  color: white;
+  opacity: 0.9;
+}
+
+.roommate-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roommate-info p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+}
+
+.habits-summary {
+  background-color: #27272a;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  border-left: 3px solid var(--color-primary);
+}
+
+.habits-summary h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.habits-list p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #cbd5e1;
+}
+
+.roommate-action {
+  margin-top: auto;
+}
+
+.back-button {
+  width: 100%;
+  margin-top: 1rem;
+}

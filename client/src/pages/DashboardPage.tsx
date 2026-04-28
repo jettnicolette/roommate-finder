@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { AuthUser } from "../api/auth";
 import HabitsPage from "./HabitsPage";
+import BrowseRoommatesPage from "./BrowseRoommatesPage";
 
 // Props coming from App.tsx.
 type DashboardPageProps = {
@@ -20,6 +21,16 @@ export default function DashboardPage({
   if (currentView === "habits") {
     return (
       <HabitsPage
+        currentUser={currentUser}
+        onBack={() => setCurrentView("dashboard")}
+      />
+    );
+  }
+
+  // If viewing browse roommates, show the BrowseRoommatesPage
+  if (currentView === "browse") {
+    return (
+      <BrowseRoommatesPage
         currentUser={currentUser}
         onBack={() => setCurrentView("dashboard")}
       />
