@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
+
 import {
   getCurrentUser,
   logoutUser,
@@ -9,37 +11,35 @@ import {
 } from "./api/auth";
 
 function App() {
-  // On first load, try to restore the logged-in user from localStorage.
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() =>
     getCurrentUser()
   );
 
-  // Called after a successful register or login.
   function handleAuthSuccess(user: AuthUser) {
-    // Save the user in localStorage so refreshes keep them logged in.
     saveCurrentUser(user);
-
-    // Update React state so the app switches to the dashboard immediately.
     setCurrentUser(user);
   }
 
-  // Called when the user clicks logout.
-  function handleLogout() {
-    // Remove the saved user from localStorage.
-    logoutUser();
+  function handleCurrentUserUpdate(user: AuthUser) {
+    saveCurrentUser(user);
+    setCurrentUser(user);
+  }
 
-    // Clear React state so the app returns to the auth page.
+  function handleLogout() {
+    logoutUser();
     setCurrentUser(null);
   }
 
-  // If nobody is logged in, show the auth page.
   if (!currentUser) {
     return <AuthPage onAuthSuccess={handleAuthSuccess} />;
   }
 
-  // If a user is logged in, show the dashboard.
   return (
-    <DashboardPage currentUser={currentUser} onLogout={handleLogout} />
+    <DashboardPage
+      currentUser={currentUser}
+      onCurrentUserUpdate={handleCurrentUserUpdate}
+      onLogout={handleLogout}
+    />
   );
 }
 

@@ -147,12 +147,20 @@ router.post("/", async (req, res) => {
 });
 
 // PUT /users/:id
+// PUT /users/:id
 router.put("/:id", async (req, res) => {
   try {
     const userId = Number(req.params.id);
+    const requestingUserId = Number(req.body.requesting_user_id);
 
     if (!Number.isInteger(userId) || userId <= 0) {
       return res.status(400).json({ error: "Invalid user ID" });
+    }
+
+    if (!Number.isInteger(requestingUserId) || requestingUserId !== userId) {
+      return res.status(403).json({
+        error: "You can only edit your own profile",
+      });
     }
 
     const {
@@ -182,7 +190,7 @@ router.put("/:id", async (req, res) => {
 
     const result = await pool.query(
       `UPDATE users
-      SET
+       SET
         username = $1,
         hashed_password = COALESCE($2, hashed_password),
         email = $3,
@@ -193,8 +201,8 @@ router.put("/:id", async (req, res) => {
         gender = $8,
         major = $9,
         home_state = $10
-      WHERE user_id = $11
-      RETURNING
+       WHERE user_id = $11
+       RETURNING
         user_id,
         username,
         email,
