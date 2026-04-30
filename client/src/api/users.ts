@@ -75,3 +75,27 @@ export async function deleteUser(userId: number): Promise<void> {
     throw new Error(errorData?.error || "Failed to delete user");
   }
 }
+
+// Get user with their habits and location details
+export async function getUserWithDetails(userId: number): Promise<any> {
+  const userResponse = await fetch(`${BASE_URL}/${userId}`);
+  if (!userResponse.ok) {
+    throw new Error("Failed to fetch user");
+  }
+  const user = await userResponse.json();
+
+  try {
+    const habitsResponse = await fetch(`http://localhost:5000/habits/user/${userId}`);
+    const habits = habitsResponse.ok ? await habitsResponse.json() : null;
+    return { ...user, habits };
+  } catch {
+    return { ...user, habits: null };
+  }
+}
+
+// Get all users with filtered results
+export async function getFilteredUsers(currentUserId: number): Promise<any[]> {
+  const users = await getUsers();
+  // Filter out current user
+  return users.filter(user => user.user_id !== currentUserId);
+}
