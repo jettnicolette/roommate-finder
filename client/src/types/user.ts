@@ -23,3 +23,16 @@ export type CreateUserInput = {
   major?: string;
   home_state?: string;
 };
+
+export type ProfileFormState = {
+  username: string;
+  password: string;
+  email: string;
+  phone_number: string;
+  real_name: string;
+  grad_year: string;
+  is_oncampus: boolean;
+  gender: string;
+  major: string;
+  home_state: string;
+};
