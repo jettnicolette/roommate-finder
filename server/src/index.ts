@@ -5,8 +5,8 @@ import { pool } from "./db";
 import usersRouter from "./routes/users";
 import habitsRouter from "./routes/habits";
 import locationsRouter from "./routes/location";
-
-
+import matchRouter from "./routes/match";
+import authRouter from "./routes/auth";
 
 dotenv.config();
 
@@ -31,7 +31,8 @@ app.get("/", async (_req, res) => {
 app.use("/users", usersRouter);
 app.use("/habits", habitsRouter);
 app.use("/locations", locationsRouter);
-
+app.use("/matches", matchRouter);
+app.use("/auth", authRouter);
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

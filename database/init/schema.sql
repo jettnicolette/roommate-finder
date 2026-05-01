@@ -28,7 +28,17 @@ CREATE TABLE IF NOT EXISTS location (
     city VARCHAR(100) NOT NULL,
     state VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
-    is_onCampus BOOLEAN NOT NULL,
+    is_oncampus BOOLEAN NOT NULL,
     allows_pets BOOLEAN NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS match (
+    match_id SERIAL PRIMARY KEY,
+    user1_id INT NOT NULL,
+    user2_id INT NOT NULL,
+    location_id INT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (location_id) REFERENCES location(location_id) ON DELETE CASCADE
+);
