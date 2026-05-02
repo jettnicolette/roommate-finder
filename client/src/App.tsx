@@ -35,11 +35,13 @@ function App() {
   }
 
   return (
+    
     <DashboardPage
       currentUser={currentUser}
       onCurrentUserUpdate={handleCurrentUserUpdate}
       onLogout={handleLogout}
     />
+    
   );
 }
 

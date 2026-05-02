@@ -15,7 +15,7 @@ function LocationList() {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/locations');
+                const response = await fetch('http://localhost:5000/locations');
                 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
@@ -40,9 +40,10 @@ function LocationList() {
     return (
         <div className="location-container">
             {locations.map((loc) => (
-                <LocationCard key={loc.id} {...loc} />
+                <LocationCard key={loc.location_id} {...loc} />
             ))}
         </div>
+        
     );
 }
 

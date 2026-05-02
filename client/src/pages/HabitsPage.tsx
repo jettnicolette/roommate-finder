@@ -189,7 +189,7 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
             {saving ? "Saving..." : "Save Habits"}
           </button>
           <button type="button" onClick={onBack} className="btn btn-secondary">
-            Cancel
+            Back
           </button>
           <button type="button" onClick={handleDelete} disabled={deleting} className="btn btn-danger">
             {deleting ? "Deleting..." : "Delete All"}
