@@ -33,7 +33,7 @@ function LocationList() {
         fetchLocations();
     }, []);
 
-    // 3. Conditional Rendering
+    //conditional rendering
     if (loading) return <p>Loading locations...</p>;
     if (error) return <p>Error: {error}</p>;
 
