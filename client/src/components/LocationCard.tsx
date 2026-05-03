@@ -19,13 +19,18 @@ function LocationCard({ location_id, address, unit_number, city, state, zip_code
 
     return (
 
-        //define HTML struct here
-        <div id={id_string} className="card">
-            <h3>{address}</h3>
-            <h3>{unit_number}</h3>
-            <p>{locationDetail}</p>
-            <p><strong>On Campus:</strong> {is_oncampus ? "Yes" : "No"}</p>
-            <p><strong>Allows Pets:</strong> {allow_pets ? "Yes" : "No"}</p>
+        //HTML struct 
+        <div id={id_string} className="location-card">
+            <div className="location-header">
+                <h3>{address}</h3>
+                <h3>{unit_number}</h3>
+                <p>{locationDetail}</p>
+
+            </div>
+            <div className='location-info'>
+                <p><strong>On Campus:</strong> {is_oncampus ? "Yes" : "No"}</p>
+                <p><strong>Allows Pets:</strong> {allow_pets ? "Yes" : "No"}</p>
+            </div>
         </div>
 
     );

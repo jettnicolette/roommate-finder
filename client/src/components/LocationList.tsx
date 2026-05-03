@@ -38,7 +38,7 @@ function LocationList() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="location-container">
+        <div className="roommates-grid">
             {locations.map((loc) => (
                 <LocationCard key={loc.location_id} {...loc} />
             ))}

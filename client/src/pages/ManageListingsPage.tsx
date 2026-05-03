@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import AddLocationForm from '../components/AddLocationForm'
+import LocationList from "../components/LocationList";
+
 
 function ManageListings({onBack}: {onBack: () => void}){
 
@@ -8,11 +10,19 @@ function ManageListings({onBack}: {onBack: () => void}){
     return(
 
         <div>
-            <button type="button" onClick={onBack} className="btn btn-secondary">
-                Back
-            </button>
-            <button type="button" onClick={() => setFormVisable(!isFormVisable)} className="btn btn-secondary">
+            <header className="page-header">
+                <h1>My Locations</h1>
+                <p>Create and edit your listings</p>
+            </header>
+
+            <button type="button" onClick={() => setFormVisable(!isFormVisable)} className="btn btn-secondary d-block ms-auto mb-4">
                 {isFormVisable ? 'Hide' : "Create New Listing"}
+            </button>
+            
+            <LocationList/>
+
+            <button type="button" onClick={onBack} className="btn btn-secondary back-button">
+                Back
             </button>
 
             {isFormVisable && (
