@@ -19,7 +19,6 @@ export default function DashboardPage({
 }: DashboardPageProps) {
   const [currentView, setCurrentView] = useState<View>("dashboard");
 
-  // If viewing habits, show the HabitsPage
   if (currentView === "habits") {
     return (
       <HabitsPage
@@ -29,7 +28,6 @@ export default function DashboardPage({
     );
   }
 
-  // If viewing browse roommates, show the BrowseRoommatesPage
   if (currentView === "browse") {
     return (
       <BrowseRoommatesPage
@@ -51,7 +49,6 @@ export default function DashboardPage({
               Logged in as @{currentUser.username}
             </p>
           </div>
-
           <button
             onClick={onLogout}
             className="rounded-md border border-blue-300 px-4 py-2 text-sm font-medium text-blue-100 hover:bg-blue-700"
@@ -69,7 +66,6 @@ export default function DashboardPage({
           <h2 className="mb-4 text-2xl font-semibold text-blue-400">
             Next Steps
           </h2>
-
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <button
               onClick={() => setCurrentView("habits")}

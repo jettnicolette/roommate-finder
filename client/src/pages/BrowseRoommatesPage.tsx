@@ -24,9 +24,7 @@ export default function BrowseRoommatesPage({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentHabits, setCurrentHabits] = useState<Habit | null>(null);
 
-  // Load all users and current user's habits
   useEffect(() => {
     async function loadData() {
       try {
@@ -36,9 +34,6 @@ export default function BrowseRoommatesPage({
           getHabits(currentUser.user_id),
         ]);
 
-        setCurrentHabits(habitsData);
-
-        // Fetch habits for all users
         const usersWithHabits = await Promise.all(
           usersData
             .filter((user) => user.user_id !== currentUser.user_id)
@@ -47,14 +42,12 @@ export default function BrowseRoommatesPage({
                 const habits = await getHabits(user.user_id);
                 return { ...user, habits, matchScore: calculateMatch(habitsData, habits) };
               } catch {
-                return { ...user, habits: null, matchScore: 0 };
+                return { ...user, habits: undefined, matchScore: 0 };
               }
             })
         );
 
-        // Sort by match score (highest first) before setting state
         const sortedUsers = usersWithHabits.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
-
         setUsers(sortedUsers);
         setFilteredUsers(sortedUsers);
       } catch (err) {
@@ -67,11 +60,9 @@ export default function BrowseRoommatesPage({
     loadData();
   }, [currentUser.user_id]);
 
-  // Filter users by name and location/habits
   useEffect(() => {
     let filtered = users;
 
-    // Filter by search term (name or username)
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(
@@ -81,9 +72,7 @@ export default function BrowseRoommatesPage({
       );
     }
 
-    // Sort by match score (highest first)
     filtered.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
-
     setFilteredUsers(filtered);
   }, [searchTerm, users]);
 
@@ -93,7 +82,6 @@ export default function BrowseRoommatesPage({
     let score = 0;
     const maxScore = 300;
 
-    // Wake time compatibility (within 1 hour)
     if (userHabits.wake_time && otherHabits.wake_time) {
       const [userHour, userMin] = userHabits.wake_time.split(":").map(Number);
       const [otherHour, otherMin] = otherHabits.wake_time.split(":").map(Number);
@@ -102,7 +90,6 @@ export default function BrowseRoommatesPage({
       else if (diff <= 120) score += 50;
     }
 
-    // Sleep time compatibility (within 1 hour)
     if (userHabits.sleep_time && otherHabits.sleep_time) {
       const [userHour, userMin] = userHabits.sleep_time.split(":").map(Number);
       const [otherHour, otherMin] = otherHabits.sleep_time.split(":").map(Number);
@@ -111,11 +98,7 @@ export default function BrowseRoommatesPage({
       else if (diff <= 120) score += 50;
     }
 
-    // Study hours compatibility (within 2 hours)
-    if (
-      userHabits.study_hours !== null &&
-      otherHabits.study_hours !== null
-    ) {
+    if (userHabits.study_hours !== null && otherHabits.study_hours !== null) {
       const diff = Math.abs(userHabits.study_hours - otherHabits.study_hours);
       if (diff <= 2) score += 100;
       else if (diff <= 5) score += 50;
@@ -141,7 +124,6 @@ export default function BrowseRoommatesPage({
 
       {error && <div className="alert alert-error">{error}</div>}
 
-      {/* Search Bar */}
       <div className="search-container">
         <input
           type="text"
@@ -152,7 +134,6 @@ export default function BrowseRoommatesPage({
         />
       </div>
 
-      {/* Roommates Grid */}
       {filteredUsers.length === 0 ? (
         <div className="card">
           <p className="text-center">
@@ -178,19 +159,13 @@ export default function BrowseRoommatesPage({
 
               <div className="roommate-info">
                 {roommate.major && (
-                  <p>
-                    <span className="label">Major:</span> {roommate.major}
-                  </p>
+                  <p><span className="label">Major:</span> {roommate.major}</p>
                 )}
                 {roommate.grad_year && (
-                  <p>
-                    <span className="label">Grad Year:</span> {roommate.grad_year}
-                  </p>
+                  <p><span className="label">Grad Year:</span> {roommate.grad_year}</p>
                 )}
                 {roommate.gender && (
-                  <p>
-                    <span className="label">Gender:</span> {roommate.gender}
-                  </p>
+                  <p><span className="label">Gender:</span> {roommate.gender}</p>
                 )}
                 <p>
                   <span className="label">Campus:</span>{" "}
@@ -203,21 +178,17 @@ export default function BrowseRoommatesPage({
                   <h4>Habits</h4>
                   <div className="habits-list">
                     {roommate.habits.wake_time && (
-                      <p> Wake-Up Time: {roommate.habits.wake_time}</p>
+                      <p>Wake-Up Time: {roommate.habits.wake_time}</p>
                     )}
                     {roommate.habits.sleep_time && (
-                      <p> Sleep Time: {roommate.habits.sleep_time}</p>
+                      <p>Sleep Time: {roommate.habits.sleep_time}</p>
                     )}
                     {roommate.habits.study_hours !== null && (
-                      <p> Amount of Study Hours: {roommate.habits.study_hours} hrs/day</p>
+                      <p>Study Hours: {roommate.habits.study_hours} hrs/day</p>
                     )}
                   </div>
                 </div>
               )}
-
-              <button className="btn btn-primary roommate-action">
-                View Profile
-              </button>
             </div>
           ))}
         </div>
