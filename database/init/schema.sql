@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS location (
     zip_code VARCHAR(10) NOT NULL,
     rent DECIMAL(10,2) NOT NULL,
     is_oncampus BOOLEAN NOT NULL,
-    allows_pets BOOLEAN NOT NULL
+    allows_pets BOOLEAN NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS match (

@@ -1,4 +1,4 @@
-import '../styles/LocationCard.css'
+import '../pages/pages.css'
 
 export interface Location {
     location_id: number;
@@ -31,8 +31,7 @@ function LocationCard({ location_id, user_id, address, unit_number, city, state,
                 <p>{locationDetail}</p>
             </div>
             <div>
-                <p>Posted by:</p>
-                <p>Name</p>
+                <p>Posted by: Name</p>
                 <button className="btn btn-secondary d-block ms-auto mb-4">View Profile</button>
             </div>
             <div className='location-info'>

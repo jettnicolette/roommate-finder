@@ -56,15 +56,7 @@ export default function ProfileSection({
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          {!profileAlreadyMade && (
-            <button
-              onClick={() => openProfileForm("create")}
-              className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
-            >
-              Create Profile
-            </button>
-          )}
+        
 
           <button
             onClick={() => openProfileForm("edit")}
@@ -73,7 +65,7 @@ export default function ProfileSection({
             Edit Profile
           </button>
         </div>
-      </div>
+      
 
       {mode === "view" ? (
         <ProfileView user={currentUser} />
