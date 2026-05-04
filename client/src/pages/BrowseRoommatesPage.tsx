@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { AuthUser } from "../api/auth";
 import { getUsers } from "../api/users";
 import { getHabits, type Habit } from "../api/habits";
+import { getMatches, sendWave, type MatchRecord } from "../api/matches";
 import type { User } from "../types/user";
 import "./pages.css";
 
@@ -21,6 +22,7 @@ export default function BrowseRoommatesPage({
 }: BrowseRoommatesPageProps) {
   const [users, setUsers] = useState<RoommateWithDetails[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<RoommateWithDetails[]>([]);
+  const [matchRecords, setMatchRecords] = useState<MatchRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,12 +33,14 @@ export default function BrowseRoommatesPage({
     async function loadData() {
       try {
         setLoading(true);
-        const [usersData, habitsData] = await Promise.all([
+        const [usersData, habitsData, matchesData] = await Promise.all([
           getUsers(),
           getHabits(currentUser.user_id),
+          getMatches(currentUser.user_id),
         ]);
 
         setCurrentHabits(habitsData);
+        setMatchRecords(matchesData);
 
         // Fetch habits for all users
         const usersWithHabits = await Promise.all(
@@ -66,6 +70,40 @@ export default function BrowseRoommatesPage({
 
     loadData();
   }, [currentUser.user_id]);
+
+  async function handleSendWave(roommateId: number) {
+    setError("");
+    try {
+      const match = await sendWave(currentUser.user_id, roommateId);
+      setMatchRecords((prev) => [...prev.filter((m) => m.match_id !== match.match_id), match]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send wave");
+    }
+  }
+
+  function getMatchForRoommate(roommateId: number) {
+    return matchRecords.find(
+      (match) =>
+        (match.user1_id === currentUser.user_id && match.user2_id === roommateId) ||
+        (match.user2_id === currentUser.user_id && match.user1_id === roommateId)
+    );
+  }
+
+  function getWaveButtonLabel(roommateId: number) {
+    const match = getMatchForRoommate(roommateId);
+    if (!match) return "👋 Wave";
+    if (match.status === "accepted") return "Matched";
+    if (match.status === "pending") {
+      return match.user1_id === currentUser.user_id ? "Wave sent" : "Incoming";
+    }
+    if (match.status === "denied") return "Wave denied";
+    return "👋 Wave";
+  }
+
+  function getWaveButtonDisabled(roommateId: number) {
+    const match = getMatchForRoommate(roommateId);
+    return Boolean(match && match.status !== "denied");
+  }
 
   // Filter users by name and location/habits
   useEffect(() => {
@@ -167,6 +205,16 @@ export default function BrowseRoommatesPage({
                 <div>
                   <h3>{roommate.real_name}</h3>
                   <p className="username">@{roommate.username}</p>
+                </div>
+                <div className="waveform">
+                  <button
+                    type="button"
+                    className="wave-action"
+                    onClick={() => handleSendWave(roommate.user_id)}
+                    disabled={getWaveButtonDisabled(roommate.user_id)}
+                  >
+                    {getWaveButtonLabel(roommate.user_id)}
+                  </button>
                 </div>
                 {roommate.matchScore !== undefined && (
                   <div className="match-badge">

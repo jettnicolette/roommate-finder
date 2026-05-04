@@ -4,6 +4,7 @@ import ProfileSection from "../components/Profile/ProfileSection";
 import HabitsPage from "./HabitsPage";
 import BrowseRoommatesPage from "./BrowseRoommatesPage";
 import LocationPage from "./LocationsPage";
+import WavePage from "./Wave";
 
 
 type DashboardPageProps = {
@@ -12,7 +13,7 @@ type DashboardPageProps = {
   onLogout: () => void;
 };
 
-type View = "dashboard" | "habits" | "profile" | "location" | "browse";
+type View = "dashboard" | "habits" | "profile" | "location" | "browse" | "waves";
 
 export default function DashboardPage({
   currentUser,
@@ -48,6 +49,11 @@ export default function DashboardPage({
         onBack={() => setCurrentView("dashboard")}
       />
     );
+  }
+
+  // If viewing waves, show the WavePage
+  if (currentView === "waves") {
+    return <WavePage currentUser={currentUser} onBack={() => setCurrentView("dashboard")} />;
   }
 
   return (
@@ -107,6 +113,18 @@ export default function DashboardPage({
               </h3>
               <p className="mt-2 text-sm text-blue-300">
                 Search for potential matches.
+              </p>
+            </button>
+
+            <button
+              onClick={() => setCurrentView("waves")}
+              className="rounded-2xl border border-blue-300 bg-gray-50 p-5 shadow-sm hover:bg-blue-200 text-left transition"
+            >
+              <h3 className="text-lg font-semibold text-blue-400">
+                Waves
+              </h3>
+              <p className="mt-2 text-sm text-blue-300">
+                See your sent, received, and accepted waves.
               </p>
             </button>
           </div>
