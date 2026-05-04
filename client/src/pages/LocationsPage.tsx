@@ -3,7 +3,12 @@ import ManageListings from "./ManageListingsPage";
 import{ useState } from 'react';
 import './pages.css';
 
-function LocationPage({ onBack }: { onBack: () => void }){
+interface locationPageProps{
+    currentUser: number;
+    onBack: () => void 
+}
+
+function LocationPage({currentUser, onBack}: locationPageProps){
     const [currentView, setCurrentView] = useState("viewLocations");
 
     return (
@@ -16,13 +21,13 @@ function LocationPage({ onBack }: { onBack: () => void }){
                     </header>
                     <button type='button' onClick={() => setCurrentView('manageLocations')} className="btn btn-secondary d-block ms-auto mb-4">Manage My Listings
                     </button>
-                    <LocationList />
+                    <LocationList/>
                     <button type="button" onClick={onBack} className="btn btn-secondary back-button">
                         Back
                     </button>
                 </div>
             )}
-            {currentView === "manageLocations" && (<ManageListings onBack={() => setCurrentView("viewLocations")} />)}
+            {currentView === "manageLocations" && (<ManageListings currentUser={currentUser} onBack={() => setCurrentView("viewLocations")} />)}
         
         
         </div>

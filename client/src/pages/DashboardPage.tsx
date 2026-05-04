@@ -35,7 +35,7 @@ export default function DashboardPage({
   if(currentView === "location"){
     return (
       <LocationPage
-      onBack={()=> setCurrentView("dashboard")}
+      onBack={()=> setCurrentView("dashboard")} currentUser={currentUser.user_id}
         />
     );
   }

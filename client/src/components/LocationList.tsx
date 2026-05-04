@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import LocationCard from './LocationCard';
 import type { Location } from './LocationCard';
 
+interface LocationListProps {
+    showOnlyUser?: boolean;
+    userId?: number;
+}
 
 //Creates list of locations
-function LocationList() {
+function LocationList({showOnlyUser = false, userId }: LocationListProps) {
 
     //use state effects to control displaying content
     const [locations, setLocations] = useState<Location[]>([]);
@@ -15,7 +19,12 @@ function LocationList() {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const response = await fetch('http://localhost:5000/locations');
+                const baseURL = 'http://localhost:5000/locations';
+                const url = showOnlyUser
+                    ? `${baseURL}/user/${userId}`
+                    : baseURL;
+
+                const response = await fetch(url);
                 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
@@ -31,7 +40,7 @@ function LocationList() {
         };
 
         fetchLocations();
-    }, []);
+    }, [showOnlyUser, userId]);
 
     //conditional rendering
     if (loading) return <p>Loading locations...</p>;
@@ -39,9 +48,11 @@ function LocationList() {
 
     return (
         <div className="roommates-grid">
-            {locations.map((loc) => (
-                <LocationCard key={loc.location_id} {...loc} />
-            ))}
+            {locations.length > 0 ? (
+                locations.map((loc) => <LocationCard key={loc.location_id} {...loc} />)
+            ) : (
+                <p>No postings found.</p>
+            )}
         </div>
         
     );

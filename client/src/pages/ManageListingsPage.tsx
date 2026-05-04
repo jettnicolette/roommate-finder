@@ -2,11 +2,14 @@ import {useState} from 'react'
 import AddLocationForm from '../components/AddLocationForm'
 import LocationList from "../components/LocationList";
 
+interface managePageProps {
+    currentUser: number;
+    onBack: () => void
+}
 
-function ManageListings({onBack}: {onBack: () => void}){
+function ManageListings({currentUser, onBack }: managePageProps){
 
     const [isFormVisable, setFormVisable] = useState<Boolean>(false);
-
     return(
 
         <div>
@@ -19,7 +22,7 @@ function ManageListings({onBack}: {onBack: () => void}){
                 {isFormVisable ? 'Hide' : "Create New Listing"}
             </button>
             
-            <LocationList/>
+            <LocationList showOnlyUser={true} userId={currentUser}/>
 
             <button type="button" onClick={onBack} className="btn btn-secondary back-button">
                 Back

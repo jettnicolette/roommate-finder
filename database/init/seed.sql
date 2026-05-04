@@ -10,11 +10,11 @@ VALUES
 (2, '07:30:00', '23:00:00', 4),
 (3, '09:00:00', '21:00:00', 6);
 
-INSERT INTO location (address, unit_number, city, state, zip_code, is_oncampus, allows_pets)
+INSERT INTO location (user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets)
 VALUES
-('123 Main St', 'Apt 1', 'Pittsburgh', 'PA', '15213', true, false),
-('456 Oak Ave', NULL, 'Columbus', 'OH', '43210', false, true),
-('789 Pine Rd', 'Unit B', 'Charleston', 'WV', '25301', true, true);
+(1, '123 Main St', 'Apt 1', 'Pittsburgh', 'PA', '15213', 1000.00,true, false),
+(2, '456 Oak Ave', NULL, 'Columbus', 'OH', '43210', 850.00,false, true),
+(3, '789 Pine Rd', 'Unit B', 'Charleston', 'WV', '25301', 590.00 ,true, true);
 
 INSERT INTO match (user1_id, user2_id, location_id, status)
 VALUES

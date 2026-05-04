@@ -23,11 +23,13 @@ CREATE TABLE IF NOT EXISTS habits (
 
 CREATE TABLE IF NOT EXISTS location (
     location_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
     address VARCHAR(255) NOT NULL,
     unit_number VARCHAR(50),
     city VARCHAR(100) NOT NULL,
     state VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
+    rent DECIMAL(10,2) NOT NULL,
     is_oncampus BOOLEAN NOT NULL,
     allows_pets BOOLEAN NOT NULL
 );

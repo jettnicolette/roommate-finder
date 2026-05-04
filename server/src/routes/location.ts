@@ -9,11 +9,13 @@ router.get("/", async (_req, res) => {
     const result = await pool.query(
         `SELECT
             location_id,
+            user_id,
             address,
             unit_number,
             city,
             state,
             zip_code,
+            rent,
             is_oncampus,
             allows_pets
         FROM location
@@ -27,6 +29,26 @@ router.get("/", async (_req, res) => {
   }
   });
 
+// GET locations from specific userID
+router.get("/user/:userid", async (req, res) => {
+  try {
+    const userID = Number(req.params.userid);
+    if (!Number.isInteger(userID) || userID <= 0) {
+      return res.status(400).json({ error: "Invalid location ID" });
+    }
+
+    const result = await pool.query(
+      'SELECT location_id, user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets FROM location WHERE user_id = $1',
+      [userID]
+    );
+
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error("GET /locations/user/:userid error:", error);
+    res.status(500).json({ error: "Failed to fetch location by specified ID" });
+  }
+});
+
   // GET locations by ID
 router.get("/:id", async (req, res) => {
   try {
@@ -36,7 +58,7 @@ router.get("/:id", async (req, res) => {
     }
 
     const result = await pool.query(
-      'SELECT address, unit_number, city, state, zip_code, is_oncampus, allows_pets FROM location WHERE location_id = $1',
+      'SELECT user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets FROM location WHERE location_id = $1',
       [locationID]
     );
 
@@ -54,13 +76,13 @@ router.get("/:id", async (req, res) => {
   // POST /locations
   router.post("/", async (req, res) => {
     try {
-      const { address, unit_number, city, state, zip_code, is_oncampus, allows_pets } = req.body; 
+      const { user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets } = req.body; 
 
       const result = await pool.query(
-        `INSERT INTO location (address, unit_number, city, state, zip_code, is_oncampus, allows_pets)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)
+        `INSERT INTO location (user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
          RETURNING *`,
-        [address, unit_number, city, state, zip_code, is_oncampus, allows_pets]
+        [user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets]
       );
 
       res.status(201).json(result.rows[0]);
@@ -74,14 +96,14 @@ router.get("/:id", async (req, res) => {
   router.put("/:id", async (req, res) => {
     try {
       const locationId = parseInt(req.params.id);
-      const { address, unit_number, city, state, zip_code, is_oncampus, allows_pets } = req.body; 
+      const { user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets } = req.body;
 
       const result = await pool.query(
         `UPDATE location
-         SET address = $1, unit_number = $2, city = $3, state = $4, zip_code = $5, is_oncampus = $6, allows_pets = $7
-         WHERE location_id = $8
-         RETURNING *`,
-        [address, unit_number, city, state, zip_code, is_oncampus, allows_pets, locationId]
+          SET address = $1, unit_number = $2, city = $3, state = $4, zip_code = $5, rent = $6, is_oncampus = $7, allows_pets = $8
+          WHERE location_id = $9 AND user_id = $10
+          RETURNING *`,
+        [address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets, locationId, user_id]
       );
 
       if (result.rows.length === 0) {
