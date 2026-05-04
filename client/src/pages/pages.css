@@ -1,17 +1,19 @@
 /* Shared styling for all pages */
 
 :root {
-  --color-bg: #27272a;
-  --color-bg-dark: #18181b;
+  --color-bg: #dbeafe;
+  --color-bg-dark: #bfdbfe;
   --color-primary: #3b82f6;
-  --color-primary-dark: #1e40af;
+  --color-primary-dark: #3b82f6;
   --color-primary-light: #60a5fa;
   --color-success: #10b981;
   --color-error: #ef4444;
   --color-error-light: #fca5a5;
-  --color-text-primary: #e0e7ff;
-  --color-text-secondary: #cbd5e1;
-  --color-border: #60a5fa;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-border: #93c5fd;
+  --color-surface: #ffffff;
+  --color-input-bg: #eff6ff;
 }
 
 html,
@@ -27,17 +29,14 @@ body {
   min-height: 100vh;
   background-color: var(--color-bg);
   padding: 2.5rem 1rem;
-}
-
-.page-container > * + * {
-  margin-top: 1.5rem;
-}
-
-.page-container {
   display: flex;
   flex-direction: column;
   max-width: 56rem;
   margin: 0 auto;
+}
+
+.page-container > * + * {
+  margin-top: 1.5rem;
 }
 
 /* Header */
@@ -83,7 +82,7 @@ body {
 .card {
   border-radius: 1rem;
   border: 1px solid var(--color-border);
-  background-color: #3f3f46;
+  background-color: var(--color-surface);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -92,25 +91,25 @@ body {
 .card h3 {
   margin: 0 0 1rem 0;
   font-weight: 600;
-  color: #60a5fa;
+  color: var(--color-primary-dark);
 }
 
 .card p {
   margin: 0;
   font-size: 0.875rem;
-  color: #60a5fa;
+  color: var(--color-text-secondary);
 }
 
 .card.card-success {
-  border-color: #10b981;
+  border-color: var(--color-success);
 }
 
 .card.card-success h2 {
-  color: #10b981;
+  color: var(--color-success);
 }
 
 .card.card-success p {
-  color: #60a5fa;
+  color: var(--color-text-secondary);
 }
 
 /* Habits Grid */
@@ -140,7 +139,7 @@ body {
 .form {
   border-radius: 1rem;
   border: 1px solid var(--color-border);
-  background-color: #3f3f46;
+  background-color: var(--color-surface);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -157,7 +156,7 @@ body {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #60a5fa;
+  color: var(--color-primary-dark);
   margin-bottom: 0.5rem;
 }
 
@@ -166,21 +165,21 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   border: 1px solid var(--color-border);
-  background-color: #27272a;
-  color: #e0e7ff;
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
   font-size: 1rem;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .form-hint {
   margin-top: 0.25rem;
   font-size: 0.75rem;
-  color: #60a5fa;
+  color: var(--color-text-secondary);
 }
 
 /* Buttons */
@@ -218,14 +217,14 @@ body {
 }
 
 .btn.btn-secondary {
-  background-color: #3f3f46;
+  background-color: #eff6ff;
   border-color: var(--color-border);
-  color: #60a5fa;
+  color: var(--color-primary-dark);
 }
 
 .btn.btn-secondary:hover:not(:disabled) {
-  background-color: #52525b;
-  border-color: var(--color-border);
+  background-color: #dbeafe;
+  border-color: var(--color-primary);
 }
 
 .btn.btn-danger {
@@ -258,19 +257,19 @@ body {
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
-  background-color: #3f3f46;
-  color: #e0e7ff;
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
   font-size: 1rem;
 }
 
 .search-input::placeholder {
-  color: #a1a1aa;
+  color: #94a3b8;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 /* Roommates Grid */
@@ -284,7 +283,7 @@ body {
 .roommate-card {
   border-radius: 0.75rem;
   border: 1px solid var(--color-border);
-  background-color: #3f3f46;
+  background-color: var(--color-surface);
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -293,8 +292,8 @@ body {
 }
 
 .roommate-card:hover {
-  border-color: #60a5fa;
-  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.12);
 }
 
 .roommate-header {
@@ -308,13 +307,13 @@ body {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #60a5fa;
+  color: var(--color-primary-dark);
 }
 
 .roommate-header .username {
   margin: 0.25rem 0 0 0;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
 }
 
 .match-badge {
@@ -322,7 +321,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  background-color: #10b981;
+  background-color: var(--color-primary);
   border-radius: 0.375rem;
   min-width: 50px;
 }
@@ -348,21 +347,22 @@ body {
 .roommate-info p {
   margin: 0;
   font-size: 0.875rem;
-  color: #cbd5e1;
+  color: #334155;
 }
 
 .habits-summary {
-  background-color: #27272a;
+  color: var(--color-text-primary);
+  background-color: var(--color-input-bg);
   padding: 0.75rem 1rem;
   border-radius: 0.375rem;
-  border-left: 3px solid var(--color-primary);
+  border-left: 3px solid var(--color-primary-dark);
 }
 
 .habits-summary h4 {
   margin: 0 0 0.5rem 0;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #60a5fa;
+  color: var(--color-primary);
 }
 
 .habits-list {
@@ -374,7 +374,6 @@ body {
 .habits-list p {
   margin: 0;
   font-size: 0.75rem;
-  color: #cbd5e1;
 }
 
 .roommate-action {

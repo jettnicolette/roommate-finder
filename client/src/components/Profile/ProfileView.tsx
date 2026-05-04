@@ -6,7 +6,7 @@ type ProfileViewProps = {
 
 export default function ProfileView({ user }: ProfileViewProps) {
   return (
-    <div className="mt-6 grid gap-3 text-sm text-blue-200 md:grid-cols-2">
+    <div className="mt-6 grid gap-3 text-sm text-blue-400 md:grid-cols-2">
       <p>
         <span className="font-medium">Username:</span> {user.username}
       </p>

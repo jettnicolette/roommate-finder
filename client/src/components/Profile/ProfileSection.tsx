@@ -43,13 +43,13 @@ export default function ProfileSection({
   }
 
   return (
-    <section className="rounded-2xl border border-blue-200 bg-zinc-600 p-6 shadow-sm">
+    <section className="rounded-2xl border border-blue-200 bg-gray-50 p-6 shadow-sm">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="mb-2 text-2xl font-semibold text-blue-300">
+          <h2 className="mb-2 text-2xl font-semibold text-blue-400">
             My Profile
           </h2>
-          <p className="text-sm text-blue-200">
+          <p className="text-sm text-blue-400">
             {profileAlreadyMade
               ? "Edit only your own profile information."
               : "Create your profile information to help find compatible roommates."}
