@@ -3,6 +3,8 @@ import type { AuthUser } from "../api/auth";
 import ProfileSection from "../components/Profile/ProfileSection";
 import HabitsPage from "./HabitsPage";
 import BrowseRoommatesPage from "./BrowseRoommatesPage";
+import LocationPage from "./LocationsPage";
+
 
 type DashboardPageProps = {
   currentUser: AuthUser;
@@ -26,6 +28,15 @@ export default function DashboardPage({
         currentUser={currentUser}
         onBack={() => setCurrentView("dashboard")}
       />
+    );
+  }
+
+  //if viewining habits
+  if(currentView === "location"){
+    return (
+      <LocationPage
+      onBack={()=> setCurrentView("dashboard")} currentUser={currentUser.user_id}
+        />
     );
   }
 

@@ -1,0 +1,38 @@
+.location-card{
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    background-color: #3f3f46;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.2s;
+}
+
+.location-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.location-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #60a5fa;
+}
+
+.location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 1rem;
+    margin-top: auto;
+}
+
+.location-info p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #cbd5e1;
+}
