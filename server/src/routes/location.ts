@@ -6,24 +6,7 @@ const router = express.Router();
 // GET /locations
 router.get("/", async (_req, res) => {
   try {
-    const result = await pool.query(
-        `SELECT
-            l.location_id,
-            l.user_id,
-            u.username,
-            u.real_name,
-            l.address,
-            l.unit_number,
-            l.city,
-            l.state,
-            l.zip_code,
-            l.rent,
-            l.is_oncampus,
-            l.allows_pets
-        FROM location l
-        JOIN users u ON l.user_id = u.user_id
-        ORDER BY location_id ASC`
-    );
+    const result = await pool.query('SELECT * FROM listing_details');
 
     res.status(200).json(result.rows);
   } catch (error) {
@@ -41,7 +24,7 @@ router.get("/user/:userid", async (req, res) => {
     }
 
     const result = await pool.query(
-      'SELECT location_id, user_id, address, unit_number, city, state, zip_code, rent, is_oncampus, allows_pets FROM location WHERE user_id = $1',
+      'SELECT * FROM listing_details WHERE user_id = $1',
       [userID]
     );
 
