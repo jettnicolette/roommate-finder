@@ -121,6 +121,10 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
         <h1>Your Habits</h1>
         <p>Set your daily schedule and preferences</p>
       </header>
+      <div className="search-container"><button onClick={onBack} className="back-button">
+        Back
+      </button>
+      </div>
 
       {error && <div className="alert alert-error">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
@@ -188,9 +192,7 @@ export default function HabitsPage({ currentUser, onBack }: HabitsPageProps) {
           <button type="submit" disabled={saving} className="btn btn-primary">
             {saving ? "Saving..." : "Save Habits"}
           </button>
-          <button type="button" onClick={onBack} className="btn btn-secondary">
-            Back
-          </button>
+          
           <button type="button" onClick={handleDelete} disabled={deleting} className="btn btn-danger">
             {deleting ? "Deleting..." : "Delete All"}
           </button>

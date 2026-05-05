@@ -175,12 +175,15 @@ export default function BrowseRoommatesPage({
       <header className="page-header">
         <h1>Browse Roommates</h1>
         <p>Find compatible roommates based on your habits and preferences</p>
+        
       </header>
 
       {error && <div className="alert alert-error">{error}</div>}
 
       {/* Search Bar */}
-      <div className="search-container">
+      <div className="search-container"><button onClick={onBack} className="back-button ">
+        Back
+      </button>
         <input
           type="text"
           placeholder="Search by name or username..."
@@ -271,9 +274,7 @@ export default function BrowseRoommatesPage({
         </div>
       )}
 
-      <button onClick={onBack} className="btn btn-secondary back-button">
-        Back
-      </button>
+      
     </div>
   );
 }

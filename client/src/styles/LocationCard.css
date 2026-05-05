@@ -52,5 +52,5 @@
     background-color: rgb(239, 246, 255);
     padding: 0.75rem 1rem;
     border-radius: 0.375rem;
-        border-left: 3px solid var(--color-primary);
+    border-left: 3px solid var(--color-primary);
 }

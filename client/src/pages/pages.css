@@ -41,7 +41,7 @@ body {
 
 /* Header */
 .page-header {
-  margin-bottom: 2rem;
+  margin-bottom: .5rem;
 }
 
 .page-header h1 {
@@ -242,6 +242,7 @@ body {
   background-color: #eff6ff;
   border-color: var(--color-border);
   color: var(--color-primary-dark);
+  text-align: center;
 }
 
 .btn.btn-secondary:hover:not(:disabled) {
@@ -271,11 +272,14 @@ body {
 
 /* Search Container */
 .search-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .search-input {
-  width: 100%;
+  width: 90%;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -440,9 +444,17 @@ body {
 }
 
 .back-button {
-  width: 100%;
-  margin-top: 1rem;
+  width: 8%;
+  display: flex;
+  flex-direction: row;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
+  font-size: 1rem;
 }
+
 
 
 .location-card{
@@ -482,4 +494,12 @@ body {
     margin: 0;
     font-size: 0.875rem;
     color: var(--color-primary);
+}
+
+/* Search Container */
+.location-back-button-container {
+  margin-bottom: .5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }

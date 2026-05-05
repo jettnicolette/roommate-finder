@@ -19,12 +19,10 @@ function LocationPage({currentUser, onBack}: locationPageProps){
                         <h1>Avaliable Locations</h1>
                         <p>View listings looking for roomates</p>
                     </header>
-                    <button type='button' onClick={() => setCurrentView('manageLocations')} className="btn btn-secondary d-block ms-auto mb-4">Manage My Listings
-                    </button>
+                    <div className="location-back-button-container"><button onClick={onBack} className="back-button">Back</button>
+                        <button type='button' onClick={() => setCurrentView('manageLocations')} className="btn btn-secondary">Manage My Listings</button>
+                    </div>
                     <LocationList/>
-                    <button type="button" onClick={onBack} className="btn btn-secondary back-button">
-                        Back
-                    </button>
                 </div>
             )}
             {currentView === "manageLocations" && (<ManageListings currentUser={currentUser} onBack={() => setCurrentView("viewLocations")} />)}

@@ -96,6 +96,9 @@ export default function WavePage({ currentUser, onBack }: WavePageProps) {
         <h1>Waves</h1>
         <p>Track incoming requests and accept or deny pending waves.</p>
       </header>
+      <button onClick={onBack} className="back-button ">
+        Back
+      </button>
 
       {error && <div className="alert alert-error">{error}</div>}
 
@@ -204,9 +207,6 @@ export default function WavePage({ currentUser, onBack }: WavePageProps) {
         )}
       </section>
 
-      <button onClick={onBack} className="btn btn-secondary back-button">
-        Back
-      </button>
     </div>
   );
 }
