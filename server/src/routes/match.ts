@@ -4,8 +4,28 @@ import { pool } from "../db";
 const router = express.Router();
 
 //GET /matches
-router.get("/", async (_req, res) => {
+router.get("/", async (req, res) => {
     try {
+        const { user_id } = req.query;
+        if (user_id) {
+            const userId = Number(user_id);
+            if (!Number.isInteger(userId) || userId <= 0) {
+                return res.status(400).json({ error: "Invalid user ID" });
+            }
+            const result = await pool.query(
+                `SELECT
+                    match_id,
+                    user1_id,
+                    user2_id,
+                    location_id,
+                    status
+                FROM match
+                WHERE user1_id = $1 OR user2_id = $1`,
+                [userId]
+            );
+            return res.status(200).json(result.rows);
+        }
+
         const result = await pool.query(
             `SELECT
                 match_id,

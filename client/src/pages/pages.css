@@ -338,6 +338,16 @@ body {
   color: var(--color-text-secondary);
 }
 
+.waveform {
+  display: flex;
+  align-items: flex-start;;
+  gap: 1rem;
+  font-size: 35px;
+}
+.wavemove {
+  animation: wave 1.5s infinite;
+}
+
 .match-badge {
   display: flex;
   flex-direction: column;
@@ -407,6 +417,26 @@ body {
 
 .roommate-action {
   margin-top: auto;
+}
+
+.wave-action {
+  border: none;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.wave-action:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.wave-action:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .back-button {

@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS match (
     match_id SERIAL PRIMARY KEY,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL,
-    location_id INT NOT NULL,
+    location_id INT,
     status VARCHAR(20) NOT NULL,
     FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE,
