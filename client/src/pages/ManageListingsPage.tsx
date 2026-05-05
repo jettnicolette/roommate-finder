@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import AddLocationForm from '../components/AddLocationForm'
 import LocationList from "../components/LocationList";
+import './pages.css';
+
 
 interface managePageProps {
     currentUser: number;
@@ -18,22 +20,29 @@ function ManageListings({currentUser, onBack }: managePageProps){
                 <p>Create and edit your listings</p>
             </header>
 
-            <button type="button" onClick={() => setFormVisable(!isFormVisable)} className="btn btn-secondary d-block ms-auto mb-4">
-                {isFormVisable ? 'Hide' : "Create New Listing"}
-            </button>
-            
+            <div>
+                <button
+                    type="button"
+                    onClick={() => setFormVisable(!isFormVisable)}
+                    className="btn btn-secondary mb-4"
+                >
+                    {isFormVisable ? 'Hide' : "Create New Listing"}
+                </button>
+                {isFormVisable && (
+                    <div className="form-container">
+                        <h3>Enter New Location Listing Details:</h3>
+                        <AddLocationForm currentUser={currentUser} />
+                    </div>
+                )}
+            </div>
+
             <LocationList showOnlyUser={true} userId={currentUser}/>
 
             <button type="button" onClick={onBack} className="btn btn-secondary back-button">
                 Back
             </button>
 
-            {isFormVisable && (
-                <div className="form-container">
-                    <h3>Enter Property Details</h3>
-                    <AddLocationForm />
-                </div>
-            )}
+           
         </div>
 
     );
