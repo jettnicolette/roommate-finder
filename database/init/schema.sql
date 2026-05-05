@@ -35,6 +35,9 @@ CREATE TABLE IF NOT EXISTS location (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+CREATE INDEX index_location_user_id ON location(user_id);
+CREATE INDEX index_location_rent ON location(rent);
+
 CREATE TABLE IF NOT EXISTS match (
     match_id SERIAL PRIMARY KEY,
     user1_id INT NOT NULL,
