@@ -35,6 +35,27 @@ CREATE TABLE IF NOT EXISTS location (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+CREATE OR REPLACE VIEW listing_details AS
+SELECT
+    l.location_id,
+    l.user_id,
+    u.username,
+    u.real_name,
+    l.address,
+    l.unit_number,
+    l.city,
+    l.state,
+    l.zip_code,
+    l.rent,
+    l.is_oncampus,
+    l.allows_pets
+FROM location l
+JOIN users u ON l.user_id = u.user_id
+ORDER BY location_id ASC;
+
+CREATE INDEX index_location_user_id ON location(user_id);
+CREATE INDEX index_location_rent ON location(rent);
+
 CREATE TABLE IF NOT EXISTS match (
     match_id SERIAL PRIMARY KEY,
     user1_id INT NOT NULL,
