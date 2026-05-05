@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS match (
     user2_id INT NOT NULL,
     location_id INT,
     status VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    accepted_at TIMESTAMP,
     FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (location_id) REFERENCES location(location_id) ON DELETE CASCADE

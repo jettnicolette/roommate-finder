@@ -7,6 +7,8 @@ export type MatchRecord = {
   user2_id: number;
   location_id: number;
   status: string;
+  created_at?: string;      
+  accepted_at?: string | null;
 };
 
 export async function getMatches(userId?: number): Promise<MatchRecord[]> {
