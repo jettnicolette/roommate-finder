@@ -49,7 +49,7 @@ function LocationList({showOnlyUser = false, userId }: LocationListProps) {
     return (
         <div className="roommates-grid">
             {locations.length > 0 ? (
-                locations.map((loc) => <LocationCard key={loc.location_id} {...loc} />)
+                locations.map((loc) => <LocationCard key={loc.location_id} current_id={userId} {...loc} />)
             ) : (
                 <p>No postings found.</p>
             )}
